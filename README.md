@@ -1,5 +1,11 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## deploy notes
+Select hosting and real-time database <br/>
+Choose build as the "public directory" <br/>
+Choose "No" for all other answers
+
+
 ## Available Scripts
 
 In the project directory, you can run:
