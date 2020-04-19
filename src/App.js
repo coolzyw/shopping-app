@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import ItemList from "./components/ItemList";
 
 const App = () => {
   const [data, setData] = useState({});
@@ -13,9 +14,9 @@ const App = () => {
   }, []);
 
   return (
-      <ul>
-        {products.map(product => <li key={product.sku}>{product.title}</li>)}
-      </ul>
+      <ItemList products={ products } >
+      </ItemList>
+
   );
 };
 
