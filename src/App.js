@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ItemList from "./components/ItemList";
+import Preference from "./components/Preference";
 import {Container, Card} from 'rbx';
 import "rbx/index.css";
 
@@ -17,8 +18,8 @@ const App = () => {
 
   return (
       <Container>
-          <ItemList products={ products } >
-          </ItemList>
+          <Preference />
+          <ItemList products={ products } > </ItemList>
       </Container>
   );
 };

@@ -1,10 +1,16 @@
 import {Card} from "rbx";
 import React from "react";
 
+var divStyle = {
+    width: '30%',
+    float: 'left',
+    margin: '10px',
+    height: '70%'
+};
 
 const Item = ({ product }) => {
     return (
-        <ul>
+        <div style={divStyle}>
             <Card>
                 <Card.Image>
                     <img src={require(`../../static/${product.sku}_1.jpg`)} alt="Smiley face" />
@@ -12,17 +18,15 @@ const Item = ({ product }) => {
 
                 <Card.Header>
                     {product.title}
+                    {product.description}
                     <Card.Header.Title>
                         {product.price}
                     </Card.Header.Title>
                 </Card.Header>
 
-                <Card.Content>
-                    {product.description}
-                </Card.Content>
             </Card>
             <br/>
-        </ul>
+        </div>
     );
 
 
