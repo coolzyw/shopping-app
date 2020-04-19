@@ -1,16 +1,16 @@
 import React, {useState} from 'react';
-import {Button} from 'rbx';
 import Item from './Item/Item';
 
 
 
 const ItemList = ({products}) => {
     return (
-        <ul>
+        <React.Fragment>
             {products.map(product =>
-                <Item key={product.sku} title={product.title}> </Item>
+                <Item key={product.sku} product={product} >
+                </Item>
             )}
-        </ul>
+        </React.Fragment>
     );
 };
 
