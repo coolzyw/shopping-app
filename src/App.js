@@ -1,25 +1,40 @@
 import React, { useEffect, useState } from 'react';
-import ItemList from "./components/ItemList";
-import Preference from "./components/Preference";
+import {ItemList} from "./components/ItemList";
 import {Container, Card} from 'rbx';
 import "rbx/index.css";
+import firebase from "./shared/firebase"
+
+const db = firebase.database().ref();
 
 const App = () => {
-  const [data, setData] = useState({});
-  const products = Object.values(data);
+  const [productData, setProductData] = useState({});
+  const [inventory, setInventory] = useState({});
+  const [filteredData, setFilteredData] = useState([]);
+  const products = Object.values(productData);
+
+
+  useEffect(() => {
+    const handleData = snap => {
+      console.log("inventory", snap.val());
+      if (snap.val()) setInventory(snap.val());
+    };
+    db.on('value', handleData, error => alert(error));
+    return () => { db.off('value', handleData); };
+  }, []);
+
+
   useEffect(() => {
     const fetchProducts = async () => {
-      const response = await fetch('./data/products.json');
-      const json = await response.json();
-      setData(json);
+      const product_response = await fetch('./data/products.json');
+      const product_json = await product_response.json();
+      setProductData(product_json);
     };
     fetchProducts();
   }, []);
 
   return (
       <Container>
-          <Preference />
-          <ItemList products={ products } > </ItemList>
+          <ItemList products={ products } inventory={ inventory } > </ItemList>
       </Container>
   );
 };
