@@ -49,11 +49,22 @@ const ItemList = ({products, inventory}) => {
       return arr;
     };
 
+    const selectedProducts = filterProducts().filter(product => {
+        console.log(product);
+        console.log(size);
+        if (product["size"][size] > 0){
+            return true;
+        }
+        else {
+            return false;
+        }
+    });
+
     return (
         <React.Fragment>
             <SizeSelector state={ { size, setSize } } />
             <Button.Group>
-                { filterProducts().map(product =>
+                { selectedProducts.map(product =>
                     <Item key={product.sku} product={product} state={ { selected, toggle } } >
                     </Item>)
                 }
