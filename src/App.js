@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import {ItemList} from "./components/ItemList";
-import {Container, Card} from 'rbx';
+import {Container, Card, Button} from 'rbx';
 import "rbx/index.css";
-import firebase from "./shared/firebase"
+import './App.css';
+import firebase from "./shared/firebase";
 
 const db = firebase.database().ref();
 
@@ -11,6 +12,7 @@ const App = () => {
   const [inventory, setInventory] = useState({});
   const [filteredData, setFilteredData] = useState([]);
   const products = Object.values(productData);
+  const [open, setOpen] = useState(false);
 
 
   useEffect(() => {

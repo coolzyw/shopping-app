@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import Item from './Item/Item';
 import {Button} from 'rbx';
+import ShoppingCart from "../ShoppingCart";
+import { Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react';
 
-const size = {O: 'XS', 1: 'S', 2:'M', 3:'ML', 4:'L', 5:'XL', 6:'XXL'};
+const size = {1: 'S', 2:'M', 3:'L', 4:'XL'};
 
 const buttonColor = selected => (
     selected ? 'success' : null
@@ -62,6 +64,7 @@ const ItemList = ({products, inventory}) => {
 
     return (
         <React.Fragment>
+            <ShoppingCart/>
             <SizeSelector state={ { size, setSize } } />
             <Button.Group>
                 { selectedProducts.map(product =>
