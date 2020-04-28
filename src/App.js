@@ -5,11 +5,11 @@ import "rbx/index.css";
 import './App.css';
 import firebase from "./shared/firebase";
 
-const db = firebase.database().ref();
+const db = firebase.database().ref("inventory");
 
 const App = () => {
   const [productData, setProductData] = useState({});
-  const [inventory, setInventory] = useState({});
+  const [inventory, setInventory] = useState({"":0});
   const [filteredData, setFilteredData] = useState([]);
   const products = Object.values(productData);
   const [open, setOpen] = useState(false);

@@ -3,7 +3,12 @@ import Popup from "reactjs-popup";
 import React from "react";
 
 
-const ShoppingCart = (host) => {
+const ShoppingCart = ({products}) => {
+
+    console.log("gggggg", products);
+
+
+
     return (
        // <Popup trigger={<Button> Shopping Cart </Button>} position="bottom center" modal closeOnDocumentClick>
            // <div> shopping cart </div>
@@ -17,6 +22,7 @@ const ShoppingCart = (host) => {
                         &times;
                     </a>
                     Shopping Cart
+                    {Object.keys(products)[0]}
                 </div>
             )}
         </Popup>

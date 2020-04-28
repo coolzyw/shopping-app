@@ -16,7 +16,9 @@ const SizeSelector = ({ state }) => (
             .map(value =>
                 <Button key={value}
                         color={ buttonColor(value === state.size) }
-                        onClick={ () => state.setSize(value) }
+                        onClick={ () => {
+                            console.log("HHHHHHHHH");
+                            state.setSize(value) }}
                 >
                     { value }
                 </Button>
@@ -36,7 +38,7 @@ const useSelection = () => {
 const ItemList = ({products, inventory}) => {
     const [size, setSize] = useState('');
     const [selected, toggle] = useSelection();
-    console.log("list", inventory);
+    const [addedProducts, addProducts] = useState({});
 
     const filterProducts = () => {
       var arr = [];
@@ -47,13 +49,10 @@ const ItemList = ({products, inventory}) => {
           arr.push(current);
         }
       });
-      console.log("hhhhh", arr);
       return arr;
     };
 
     const selectedProducts = filterProducts().filter(product => {
-        console.log(product);
-        console.log(size);
         if (product["size"][size] > 0){
             return true;
         }
@@ -64,11 +63,13 @@ const ItemList = ({products, inventory}) => {
 
     return (
         <React.Fragment>
-            <ShoppingCart/>
+            <ShoppingCart products={addedProducts} />
             <SizeSelector state={ { size, setSize } } />
             <Button.Group>
                 { selectedProducts.map(product =>
-                    <Item key={product.sku} product={product} state={ { selected, toggle } } >
+                    <Item key={product.sku} product={product}
+                          state={ { selected, toggle } }
+                            add={{addedProducts, addProducts}}>
                     </Item>)
                 }
             </Button.Group>
