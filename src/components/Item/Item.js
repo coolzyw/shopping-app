@@ -5,8 +5,7 @@ import {buttonColor} from "../ItemList";
 var divStyle = {
     width: '30%',
     float: 'left',
-    margin: '10px',
-    height: '70%'
+    height: '50%'
 };
 
 const Item = ({ product, state, add}) => {

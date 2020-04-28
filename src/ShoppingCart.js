@@ -19,7 +19,7 @@ const ShoppingCart = ({added, products}) => {
     };
 
     return (
-        <Popup trigger={<Button> Shopping Cart </Button>} position="top left" modal>
+        <Popup trigger={<Button> Shopping Cart </Button>} position="bottom center" modal>
             {close => (
                 <div>
                     <a className="close" onClick={close}>

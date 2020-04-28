@@ -32,6 +32,11 @@ button.button {
   float:right;
 }
 
+.card {
+  max-width: 50%;
+  margin: 0px;
+}
+
 div.card.shopping-cart {
   max-width: 30%;
   float: left;
