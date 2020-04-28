@@ -63,7 +63,7 @@ const ItemList = ({products, inventory}) => {
 
     return (
         <React.Fragment>
-            <ShoppingCart products={addedProducts} />
+            <ShoppingCart products={products} added={addedProducts} />
             <SizeSelector state={ { size, setSize } } />
             <Button.Group>
                 { selectedProducts.map(product =>

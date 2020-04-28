@@ -3,18 +3,21 @@ import Popup from "reactjs-popup";
 import React from "react";
 
 
-const ShoppingCart = ({products}) => {
+const ShoppingCart = ({added, products}) => {
 
-    console.log("gggggg", products);
-
-
+    const getInfo = () => {
+        var arr = [];
+        products.map(product => {
+            if (added.hasOwnProperty(product["sku"])) {
+                product["shopping-cart"] = added[product["sku"]];
+                arr.push(product);
+            }
+        });
+        console.log("arrr", arr);
+        return arr;
+    };
 
     return (
-       // <Popup trigger={<Button> Shopping Cart </Button>} position="bottom center" modal closeOnDocumentClick>
-           // <div> shopping cart </div>
-
-        //</Popup>
-
         <Popup trigger={<Button> Shopping Cart </Button>} position="top left" modal>
             {close => (
                 <div>
@@ -22,13 +25,13 @@ const ShoppingCart = ({products}) => {
                         &times;
                     </a>
                     Shopping Cart
-                    {Object.keys(products)[0]}
+                    {
+                        getInfo().map(each =>
+                        <Button> {each["title"]}</Button>)
+                    }
                 </div>
             )}
         </Popup>
-
-
-
     );
 };
 
