@@ -7,10 +7,11 @@ import ShoppingCartItem from "./components/ShoppingCartItem";
 const ShoppingCart = ({added, products}) => {
 
     const getInfo = () => {
+        var addedPro = added.addedProducts;
         var arr = [];
         products.map(product => {
-            if (added.hasOwnProperty(product["sku"])) {
-                product["shopping-cart"] = added[product["sku"]];
+            if (addedPro.hasOwnProperty(product["sku"])) {
+                product["shopping-cart"] = addedPro[product["sku"]];
                 arr.push(product);
             }
         });
@@ -27,7 +28,7 @@ const ShoppingCart = ({added, products}) => {
                     Shopping Cart
                     {
                         getInfo().map(each =>
-                        <ShoppingCartItem product={each}> </ShoppingCartItem>)
+                        <ShoppingCartItem key={each.sku} product={each} remove={added}> </ShoppingCartItem>)
                     }
                 </div>
             )}

@@ -1,8 +1,8 @@
-import {Card} from "rbx";
+import {Card, Button} from "rbx";
 import React from "react";
 
 
-const ShoppingCartItem = ({ product }) => {
+const ShoppingCartItem = ({ product, remove}) => {
 
     return (
             <Card className="shopping-cart">
@@ -17,6 +17,17 @@ const ShoppingCartItem = ({ product }) => {
                         price: {product.price}
                         <br/>
                         quantity: {product["shopping-cart"]}
+                        <Button onClick={() => {
+                            var prev = remove.addedProducts;
+                            if (prev[product["sku"]] > 1) {
+                                prev[product["sku"]] -= 1;
+                            }
+                            else {
+                                delete prev[product["sku"]];
+                            }
+                            console.log("after delete", prev);
+                            remove.addProducts(prev);
+                        }}> Remove </Button>
                     </Card.Header.Title>
                 </Card.Content>
 

@@ -17,7 +17,6 @@ const SizeSelector = ({ state }) => (
                 <Button key={value}
                         color={ buttonColor(value === state.size) }
                         onClick={ () => {
-                            console.log("HHHHHHHHH");
                             state.setSize(value) }}
                 >
                     { value }
@@ -63,7 +62,7 @@ const ItemList = ({products, inventory}) => {
 
     return (
         <React.Fragment>
-            <ShoppingCart products={products} added={addedProducts} />
+            <ShoppingCart products={products} added={{addedProducts, addProducts}} />
             <SizeSelector state={ { size, setSize } } />
             <Button.Group>
                 { selectedProducts.map(product =>
