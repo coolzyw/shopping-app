@@ -32,6 +32,11 @@ button.button {
   float:right;
 }
 
+div.card.shopping-cart {
+  max-width: 30%;
+  float: left;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

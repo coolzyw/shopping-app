@@ -1,6 +1,7 @@
 import {Button} from "rbx";
 import Popup from "reactjs-popup";
 import React from "react";
+import ShoppingCartItem from "./components/ShoppingCartItem";
 
 
 const ShoppingCart = ({added, products}) => {
@@ -13,7 +14,6 @@ const ShoppingCart = ({added, products}) => {
                 arr.push(product);
             }
         });
-        console.log("arrr", arr);
         return arr;
     };
 
@@ -27,7 +27,7 @@ const ShoppingCart = ({added, products}) => {
                     Shopping Cart
                     {
                         getInfo().map(each =>
-                        <Button> {each["title"]}</Button>)
+                        <ShoppingCartItem product={each}> </ShoppingCartItem>)
                     }
                 </div>
             )}
