@@ -6,8 +6,8 @@ const ShoppingCartItem = ({ product, remove}) => {
 
     useEffect(function() {
         const id = setInterval(function log() {
-            console.log("Count is:", remove.addedProducts);
-            console.log(product["shopping-cart"]);
+            // console.log("Count is:", remove.addedProducts);
+            // console.log(product["shopping-cart"]);
         }, 2000);
         return function() {
             clearInterval(id);
