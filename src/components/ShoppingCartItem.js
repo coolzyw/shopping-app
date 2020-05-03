@@ -26,8 +26,7 @@ const ShoppingCartItem = ({ product, remove}) => {
                 <Card.Content>
                     <Card.Header.Title>
                         price: {product.price}
-                        <br/>
-                        quantity: {product["shopping-cart"]}
+                        {/*quantity: {product["shopping-cart"]}*/}
                         <Button onClick={() => {
                             var prev = remove.addedProducts;
                             if (prev[product["sku"]] > 1) {

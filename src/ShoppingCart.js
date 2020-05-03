@@ -15,6 +15,7 @@ const ShoppingCart = ({added, products}) => {
                 arr.push(product);
             }
         });
+        console.log("shopping cart", arr);
         return arr;
     };
 
@@ -26,10 +27,12 @@ const ShoppingCart = ({added, products}) => {
                         &times;
                     </a>
                     Shopping Cart
-                    {
-                        getInfo().map(each =>
-                        <ShoppingCartItem key={each.sku} product={each} remove={added}> </ShoppingCartItem>)
-                    }
+                    <div>
+                        {
+                            getInfo().map(each =>
+                                <ShoppingCartItem product={each} remove={added}> </ShoppingCartItem>)
+                        }
+                    </div>
                 </div>
             )}
         </Popup>

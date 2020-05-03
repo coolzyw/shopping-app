@@ -8,7 +8,7 @@ var divStyle = {
     height: '50%'
 };
 
-const Item = ({ product, state, add}) => {
+const Item = ({ product, state, add, size}) => {
 
     return (
         <div style={divStyle} color={ buttonColor(state.selected.includes(product))}
@@ -26,14 +26,23 @@ const Item = ({ product, state, add}) => {
                         {product.price}
                     </Card.Header.Title>
                     <Button key={product.sku} onClick={()=> {
-                        console.log(product);
+                        console.log(size);
                         var prev = add.addedProducts;
-                        if (prev.hasOwnProperty(product["sku"]) && prev[product["sku"]] != NaN) {
-                            prev[product["sku"]] += 1;
+                        if (prev.hasOwnProperty(product["sku"]) &&
+                            prev[product["sku"]].hasOwnProperty(size)) {
+                            const cap = product["size"][size];
+                            if (prev[product["sku"]][size] === cap) {
+                                alert("you have ordered more than our instore caps");
+                            }
+                            else {
+                                prev[product["sku"]][size] += 1;
+                            }
+                        }
+                        else if (prev.hasOwnProperty(product["sku"])) {
+                            prev[product["sku"]][size] = 1;
                         }
                         else {
-                            prev[product["sku"]] = 1;
-
+                            prev[product["sku"]] = {};
                         }
                         console.log(prev);
                         add.addProducts(prev);

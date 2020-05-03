@@ -68,7 +68,8 @@ const ItemList = ({products, inventory}) => {
                 { selectedProducts.map(product =>
                     <Item key={product.sku} product={product}
                           state={ { selected, toggle } }
-                            add={{addedProducts, addProducts}}>
+                            add={{addedProducts, addProducts}}
+                            size={size} >
                     </Item>)
                 }
             </Button.Group>
