@@ -1,11 +1,48 @@
 import React, { useEffect, useState } from 'react';
 import {ItemList} from "./components/ItemList";
-import {Container, Card, Button} from 'rbx';
+import {Container, Card, Button, Message, Title} from 'rbx';
 import "rbx/index.css";
 import './App.css';
 import firebase from "./shared/firebase";
+import 'firebase/auth';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
 const db = firebase.database().ref("inventory");
+
+const uiConfig = {
+  signInFlow: 'popup',
+  signInOptions: [
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID
+  ],
+  callbacks: {
+    signInSuccessWithAuthResult: () => false
+  }
+};
+
+const Welcome = ({ user }) => (
+    <Message color="info">
+      <Message.Header>
+        Welcome, {user.displayName}
+        <Button primary onClick={() => firebase.auth().signOut()}>
+          Log out
+        </Button>
+      </Message.Header>
+    </Message>
+);
+
+const Banner = ({ user, title }) => (
+    <React.Fragment>
+      { user ? <Welcome user={ user } /> : <SignIn /> }
+      <Title>{ title || '[loading...]' }</Title>
+    </React.Fragment>
+);
+
+const SignIn = () => (
+    <StyledFirebaseAuth
+        uiConfig={uiConfig}
+        firebaseAuth={firebase.auth()}
+    />
+);
 
 const App = () => {
   const [productData, setProductData] = useState({});
@@ -13,7 +50,7 @@ const App = () => {
   const [filteredData, setFilteredData] = useState([]);
   const products = Object.values(productData);
   const [open, setOpen] = useState(false);
-
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const handleData = snap => {
@@ -34,9 +71,14 @@ const App = () => {
     fetchProducts();
   }, []);
 
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(setUser);
+  }, []);
+
   return (
       <Container>
-          <ItemList products={ products } inventory={ inventory } > </ItemList>
+        <Banner title="shopping cart" user={ user } />
+        <ItemList products={ products } inventory={ inventory } > </ItemList>
       </Container>
   );
 };
