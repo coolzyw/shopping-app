@@ -7,7 +7,7 @@ import firebase from "./shared/firebase";
 import 'firebase/auth';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
-const db = firebase.database().ref("inventory");
+const db = firebase.database().ref();
 
 const uiConfig = {
   signInFlow: 'popup',
@@ -54,22 +54,25 @@ const App = () => {
 
   useEffect(() => {
     const handleData = snap => {
-      console.log("inventory", snap.val());
-      if (snap.val()) setInventory(snap.val());
+      console.log("all data", snap.val());
+      if (snap.val()) {
+        setInventory(snap.val()["inventory"]);
+        setProductData(snap.val()["products"]);
+      }
     };
     db.on('value', handleData, error => alert(error));
     return () => { db.off('value', handleData); };
   }, []);
 
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const product_response = await fetch('./data/products.json');
-      const product_json = await product_response.json();
-      setProductData(product_json);
-    };
-    fetchProducts();
-  }, []);
+  // useEffect(() => {
+  //   const fetchProducts = async () => {
+  //     const product_response = await fetch('./data/products.json');
+  //     const product_json = await product_response.json();
+  //     setProductData(product_json);
+  //   };
+  //   fetchProducts();
+  // }, []);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(setUser);

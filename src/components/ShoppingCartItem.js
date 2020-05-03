@@ -34,7 +34,6 @@ const ShoppingCartItem = ({ product, remove}) => {
                                 <Button> {key} : {value} </Button>
                             )
                         }
-                        {/*quantity: {product["shopping-cart"]}*/}
                         <Button onClick={() => {
                             var prev = remove.addedProducts;
                             if (prev[product["sku"]] > 1) {
