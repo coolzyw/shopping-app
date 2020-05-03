@@ -1,6 +1,6 @@
 import {Card, Button} from "rbx";
 import React from "react";
-import {buttonColor} from "../ItemList";
+import {buttonColor, size} from "../ItemList";
 
 var divStyle = {
     width: '30%',
@@ -9,17 +9,6 @@ var divStyle = {
 };
 
 const Item = ({ product, state, add}) => {
-
-    const getInStockSize = (sizes) => {
-        console.log(sizes);
-        var size = [];
-        Object.keys(sizes).forEach(function (key){
-            if (sizes[key] > 0) {
-                size.push(key);
-            }
-        });
-        return size;
-    };
 
     return (
         <div style={divStyle} color={ buttonColor(state.selected.includes(product))}
@@ -33,13 +22,6 @@ const Item = ({ product, state, add}) => {
                 </Card.Header>
                 <Card.Content>
                     {product.description}
-                        <Button.Group>
-                            {
-                                getInStockSize(product["size"]).map(size =>
-                                    <Button> {size} </Button>
-                                )
-                            }
-                        </Button.Group>
                     <Card.Header.Title>
                         {product.price}
                     </Card.Header.Title>
