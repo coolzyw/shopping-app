@@ -10,6 +10,17 @@ var divStyle = {
 
 const Item = ({ product, state, add}) => {
 
+    const getInStockSize = (sizes) => {
+        console.log(sizes);
+        var size = [];
+        Object.keys(sizes).forEach(function (key){
+            if (sizes[key] > 0) {
+                size.push(key);
+            }
+        });
+        return size;
+    };
+
     return (
         <div style={divStyle} color={ buttonColor(state.selected.includes(product))}
              onClick={ () => state.toggle(product) }>
@@ -17,16 +28,23 @@ const Item = ({ product, state, add}) => {
                 <Card.Image>
                     <img src={require(`../../static/${product.sku}_1.jpg`)} alt="Smiley face" />
                 </Card.Image>
-
                 <Card.Header>
                     {product.title}
                 </Card.Header>
                 <Card.Content>
                     {product.description}
+                        <Button.Group>
+                            {
+                                getInStockSize(product["size"]).map(size =>
+                                    <Button> {size} </Button>
+                                )
+                            }
+                        </Button.Group>
                     <Card.Header.Title>
                         {product.price}
                     </Card.Header.Title>
                     <Button key={product.sku} onClick={()=> {
+                        console.log(product);
                         var prev = add.addedProducts;
                         if (prev.hasOwnProperty(product["sku"]) && prev[product["sku"]] != NaN) {
                             prev[product["sku"]] += 1;

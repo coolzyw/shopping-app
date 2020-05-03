@@ -4,8 +4,6 @@ import React, {useEffect, useState} from 'react';
 
 const ShoppingCartItem = ({ product, remove}) => {
 
-
-
     useEffect(function() {
         const id = setInterval(function log() {
             console.log("Count is:", remove.addedProducts);
