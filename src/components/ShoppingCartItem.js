@@ -7,6 +7,7 @@ const ShoppingCartItem = ({ product, remove}) => {
     useEffect(function() {
         const id = setInterval(function log() {
             console.log("Count is:", remove.addedProducts);
+            console.log(product["shopping-cart"]);
         }, 2000);
         return function() {
             clearInterval(id);
@@ -26,6 +27,13 @@ const ShoppingCartItem = ({ product, remove}) => {
                 <Card.Content>
                     <Card.Header.Title>
                         price: {product.price}
+                        {
+                            Object.entries(product["shopping-cart"]).map(([key, value]) =>
+                                // Pretty straightforward - use key for the key and value for the value.
+                                // Just to clarify: unlike object destructuring, the parameter names don't matter here.
+                                <Button> {key} : {value} </Button>
+                            )
+                        }
                         {/*quantity: {product["shopping-cart"]}*/}
                         <Button onClick={() => {
                             var prev = remove.addedProducts;
