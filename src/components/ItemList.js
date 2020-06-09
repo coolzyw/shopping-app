@@ -29,7 +29,7 @@ const SizeSelector = ({ state }) => (
 const useSelection = () => {
     const [selected, setSelected] = useState([]);
     const toggle = (x) => {
-        setSelected(selected.includes(x) ? selected.filter(y => y !== x) : [x].concat(selected))
+        setSelected(selected.includes(x) ? selected.filter(y => y !== x) : [x].concat(selected));
     };
     return [ selected, toggle ];
 };
@@ -52,7 +52,7 @@ const ItemList = ({products, inventory}) => {
     };
 
     const selectedProducts = filterProducts().filter(product => {
-        if (product["size"][size] > 0){
+        if (product["size"][size] > 0 || size === ''){
             return true;
         }
         else {
